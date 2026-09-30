@@ -5,6 +5,29 @@
   const header = document.querySelector("[data-header]");
   const menuButton = document.querySelector("[data-menu]");
   const mobileNav = document.querySelector("[data-mobile-nav]");
+  const ATTRIBUTION_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "yclid", "gclid"];
+
+  const saveAttribution = () => {
+    const params = new URLSearchParams(window.location.search);
+    let stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem("rovno_attribution") || "{}"); } catch { stored = {}; }
+    ATTRIBUTION_KEYS.forEach((key) => {
+      const value = params.get(key);
+      if (value) stored[key] = value.slice(0, 200);
+    });
+    if (!stored.landing_page) stored.landing_page = window.location.href.slice(0, 500);
+    if (!stored.referrer && document.referrer) stored.referrer = document.referrer.slice(0, 500);
+    try { sessionStorage.setItem("rovno_attribution", JSON.stringify(stored)); } catch { /* Private mode may block storage. */ }
+    return stored;
+  };
+
+  const attribution = saveAttribution();
+  window.dataLayer = window.dataLayer || [];
+  const trackGoal = (goal, params = {}) => {
+    window.dataLayer.push({ event: goal, ...params });
+    const metricaId = Number(window.ROVNO_METRICA_ID || 0);
+    if (metricaId && typeof window.ym === "function") window.ym(metricaId, "reachGoal", goal, params);
+  };
 
   let lastY = window.scrollY;
   let ticking = false;
@@ -36,6 +59,10 @@
     document.body.classList.toggle("menu-open", open);
   });
   mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+  document.querySelectorAll("[data-cta], a[href='#contact'], a[href$='#contact']").forEach((link) => {
+    link.addEventListener("click", () => trackGoal("cta_click", { cta: link.textContent.trim().slice(0, 80), page: location.pathname }));
+  });
 
   const revealItems = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -78,6 +105,12 @@
   const status = document.querySelector("[data-form-status]");
   const submitButton = form?.querySelector("button[type='submit']");
   const phoneInput = form?.querySelector("input[name='phone']");
+  let formStarted = false;
+  form?.addEventListener("focusin", () => {
+    if (formStarted) return;
+    formStarted = true;
+    trackGoal("form_start", { page: location.pathname });
+  });
 
   phoneInput?.addEventListener("input", () => {
     const raw = phoneInput.value.replace(/\D/g, "").slice(0, 12);
@@ -106,7 +139,8 @@
       message: String(data.get("message") || "").trim(),
       website: String(data.get("website") || "").trim(),
       page: window.location.href,
-      sentAt: new Date().toISOString()
+      sentAt: new Date().toISOString(),
+      attribution
     };
 
     if (payload.name.length < 2) {
@@ -132,6 +166,7 @@
 
       form.reset();
       setStatus("Спасибо! Заявка отправлена. Скоро с вами свяжемся.", "success");
+      trackGoal("lead_sent", { service: payload.service, page: location.pathname, ...attribution });
     } catch (error) {
       setStatus("Не удалось отправить заявку. Проверьте интернет и попробуйте ещё раз.", "error");
     } finally {
