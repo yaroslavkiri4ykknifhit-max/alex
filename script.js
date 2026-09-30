@@ -60,6 +60,15 @@
   });
   mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
 
+  const mobileCta = document.querySelector(".mobile-cta");
+  const contactSection = document.querySelector("#contact");
+  if (mobileCta && contactSection && "IntersectionObserver" in window) {
+    const ctaObserver = new IntersectionObserver(([entry]) => {
+      mobileCta.classList.toggle("is-hidden", entry.isIntersecting);
+    }, { threshold: 0.08 });
+    ctaObserver.observe(contactSection);
+  }
+
   document.querySelectorAll("[data-cta], a[href='#contact'], a[href$='#contact']").forEach((link) => {
     link.addEventListener("click", () => trackGoal("cta_click", { cta: link.textContent.trim().slice(0, 80), page: location.pathname }));
   });

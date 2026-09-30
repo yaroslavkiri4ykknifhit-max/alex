@@ -187,7 +187,7 @@ img { display: block; width: 100%; }
 .logo--light { color: #fff; }
 .footer__links { display: flex; gap: 28px; margin-left: auto; font-size: .73rem; font-weight: 700; }
 .footer__bottom { display: flex; justify-content: space-between; gap: 25px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.11); color: rgba(255,255,255,.4); font-size: .6rem; }
-.mobile-cta { display: none; }
+.mobile-cta { display: none; transition: opacity .25s, transform .25s; }
 
 /* Service and price landing pages */
 .inner-page { background: #f7f3ec; }
@@ -404,6 +404,7 @@ img { display: block; width: 100%; }
   .price-table td:last-child { margin-top: 8px; text-align: left; }
   .mobile-cta { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: flex; min-height: 56px; align-items: center; justify-content: space-between; gap: 18px; padding: 0 19px; border-radius: 12px; color: #fff; background: var(--accent); box-shadow: 0 12px 34px rgba(36,26,21,.32); font-size: .86rem; font-weight: 800; }
   .mobile-cta span { font-size: 1.15rem; }
+  .mobile-cta.is-hidden, body.menu-open .mobile-cta { opacity: 0; transform: translateY(120%); pointer-events: none; }
 }
 
 @media (max-width: 370px) {
