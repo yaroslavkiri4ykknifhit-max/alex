@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const API_ENDPOINT = "https://rovno-leads-minsk.airy-ape-7451.chatgpt.site/api/lead";
+  const API_ENDPOINT = "https://rovno-leads-minsk.cherelle397.chatgpt.site/api/lead";
   const header = document.querySelector("[data-header]");
   const menuButton = document.querySelector("[data-menu]");
   const mobileNav = document.querySelector("[data-mobile-nav]");
