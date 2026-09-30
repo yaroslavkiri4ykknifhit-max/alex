@@ -3,490 +3,214 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Механизированная штукатурка и отделочные работы в Минске. Бесплатный выезд, замер и расчет стоимости.">
-  <meta name="theme-color" content="#f3eee7">
-  <title>Ремонт под ключ — Механизированная штукатурка в Минске</title>
-
-  <!-- Fonts -->
+  <meta name="description" content="Механизированная штукатурка стен в Минске и Минской области. 10+ лет опыта, бесплатный замер, фиксированная смета и гарантия по договору.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:title" content="РОВНО — механизированная штукатурка в Минске">
+  <meta property="og:description" content="Ровные стены точно в срок. Бесплатный замер и расчёт стоимости.">
+  <meta property="og:type" content="website">
+  <title>РОВНО — механизированная штукатурка в Минске</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
-  <!-- Swiper -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Onest:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="site-loader" data-loader aria-hidden="true">
-    <div class="loader-inner">
-      <div class="loader-mark">РП</div>
-      <span>РЕМОНТ ПОД КЛЮЧ</span>
-      <div class="loader-progress"><i data-loader-progress></i></div>
-    </div>
-  </div>
+  <div class="noise" aria-hidden="true"></div>
 
-  <div class="cursor" data-cursor aria-hidden="true">
-    <span></span>
-  </div>
-
-  <header class="site-header" data-header>
-    <div class="container header-inner">
-      <a class="brand magnetic" href="#top" aria-label="Ремонт под ключ — на главную">
-        <span class="brand-icon" aria-hidden="true">⌂</span>
-        <span class="brand-copy">
-          <strong>РЕМОНТ<br>ПОД КЛЮЧ</strong>
-          <small>НАДЁЖНО. КАЧЕСТВЕННО. В СРОК.</small>
-        </span>
+  <header class="header" data-header>
+    <div class="container header__inner">
+      <a class="logo" href="#top" aria-label="РОВНО — на главную">
+        <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M8 38V13h25v25H8Z" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M15 20h11M15 27h11M15 34h11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="m31 9 9 9-4 4-9-9 4-4Z" fill="#e8653f"/>
+          <path d="m27 13-3 3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="logo__text"><strong>РОВНО</strong><small>штукатурка и отделка</small></span>
       </a>
 
-      <nav class="desktop-nav" aria-label="Основная навигация">
+      <nav class="nav" aria-label="Основная навигация">
         <a href="#services">Услуги</a>
-        <a href="#works">Портфолио</a>
+        <a href="#benefits">Преимущества</a>
+        <a href="#works">Результаты</a>
         <a href="#process">Этапы</a>
-        <a href="#reviews">Отзывы</a>
-        <a href="#contact">Контакты</a>
+        <a href="#faq">Вопросы</a>
       </nav>
 
-      <div class="header-contact">
-        <a class="phone" href="tel:+375291234567">+375 (29) 123-45-67</a>
-        <span>ежедневно с 8:00 до 20:00</span>
-      </div>
-
-      <a class="btn btn-dark btn-small magnetic" href="#contact">Заказать звонок <span>↗</span></a>
-
-      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false" data-menu-toggle>
+      <a class="button button--small" href="#contact">Бесплатный замер <span>↗</span></a>
+      <button class="menu" type="button" aria-label="Открыть меню" aria-expanded="false" data-menu>
         <span></span><span></span>
       </button>
     </div>
-
-    <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-      <nav aria-label="Мобильная навигация">
-        <a href="#services">Услуги</a>
-        <a href="#works">Портфолио</a>
-        <a href="#process">Этапы</a>
-        <a href="#reviews">Отзывы</a>
-        <a href="#contact">Контакты</a>
-      </nav>
-      <a class="btn btn-dark" href="#contact">Получить расчёт <span>↗</span></a>
+    <div class="mobile-nav" data-mobile-nav>
+      <a href="#services">Услуги</a><a href="#benefits">Преимущества</a><a href="#works">Результаты</a><a href="#process">Этапы</a><a href="#faq">Вопросы</a>
+      <a class="button" href="#contact">Получить расчёт <span>↗</span></a>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-bg" data-hero-parallax>
-        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=2200&q=88" alt="Мастер выполняет отделочные работы" fetchpriority="high">
+    <section class="hero">
+      <div class="hero__media" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2200&q=86" alt="" fetchpriority="high">
       </div>
-      <div class="hero-overlay"></div>
-
-      <div class="container hero-content">
-        <div class="hero-copy">
-          <p class="eyebrow hero-reveal">ШТУКАТУРНЫЕ РАБОТЫ · МИНСК И ОБЛАСТЬ</p>
-
-          <h1 id="hero-title" class="display hero-title">
-            <span class="line-mask"><span class="line">Идеально ровные стены</span></span>
-            <span class="line-mask"><span class="line">— основа вашего</span></span>
-            <span class="line-mask"><span class="line">комфорта.</span></span>
-          </h1>
-
-          <p class="hero-lead hero-reveal">
-            Механизированная штукатурка и профессиональная отделка.
-            Быстро, качественно, с гарантией.
-          </p>
-
-          <div class="hero-proof hero-reveal">
-            <div class="proof-item">
-              <span class="proof-icon">◫</span>
-              <span>Бесплатный<br>выезд на объект</span>
-            </div>
-            <div class="proof-item">
-              <span class="proof-icon">⌁</span>
-              <span>Бесплатный<br>замер и смета</span>
-            </div>
-            <div class="proof-item">
-              <span class="proof-icon">◌</span>
-              <span>Профессиональная<br>команда</span>
-            </div>
-            <div class="proof-item">
-              <span class="proof-icon">♡</span>
-              <span>Гарантия<br>на работы</span>
-            </div>
-          </div>
-
-          <div class="hero-actions hero-reveal">
-            <a class="btn btn-dark magnetic" href="#contact">Рассчитать стоимость <span>↗</span></a>
-            <a class="text-link" href="#works"><span class="play">▶</span> Смотреть наши работы</a>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <div class="hero__copy reveal">
+          <div class="eyebrow"><span></span> Минск и Минская область</div>
+          <h1>Ровные стены.<br><em>Честная смета.</em><br>Точно в срок.</h1>
+          <p>Механизированная штукатурка квартир, домов и коммерческих помещений. Замеряем бесплатно, фиксируем цену и отвечаем за качество по договору.</p>
+          <div class="hero__actions">
+            <a class="button button--accent" href="#contact">Рассчитать стоимость <span>↗</span></a>
+            <a class="link" href="#works">Посмотреть результат <span>↓</span></a>
           </div>
         </div>
 
-        <aside class="hero-price hero-reveal">
-          <span>ОТ</span>
-          <strong>18 <i>BYN/м²</i></strong>
-          <small>МИНСК<br>И ОБЛАСТЬ</small>
-        </aside>
+        <div class="hero__stats reveal">
+          <div><strong>10+</strong><span>лет опыта<br>в отделке</span></div>
+          <div><strong>0 BYN</strong><span>выезд, замер<br>и расчёт</span></div>
+          <div><strong>1 смета</strong><span>без доплат<br>после старта</span></div>
+        </div>
 
-        <div class="hero-note">КАЧЕСТВО<br><em>в каждой детали</em></div>
+        <div class="hero__badge" aria-label="Гарантия по договору">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circle" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs><text><textPath href="#circle">ГАРАНТИЯ • ПО ДОГОВОРУ • </textPath></text><path d="m44 60 11 11 23-25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </div>
     </section>
 
-    <section class="section section-intro" id="about" data-reveal-section>
+    <section class="trustbar" aria-label="Преимущества">
+      <div class="container trustbar__inner">
+        <span>Бесплатный замер</span><i></i><span>Материалы с доставкой</span><i></i><span>Уборка после работ</span><i></i><span>Гарантия по договору</span>
+      </div>
+    </section>
+
+    <section class="section intro" id="benefits">
       <div class="container">
-        <div class="section-kicker">ПОЧЕМУ ВЫБИРАЮТ НАС</div>
-        <div class="intro-grid">
-          <h2 class="display section-title">Больше, чем<br>просто штукатурка</h2>
-          <div class="intro-copy">
-            <p>
-              Мы не просто выполняем работы — мы создаём надёжную основу для вашего будущего интерьера.
-              С нами вы экономите время, деньги и нервы.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <div><span class="section-num">01</span><span class="eyebrow">Почему нам доверяют</span></div>
+          <h2>От голых стен —<br>до готовой основы</h2>
+          <p>Организуем весь этап штукатурки: привезём оборудование и материалы, защитим окна и пол, выставим маяки, нанесём смесь и уберём объект.</p>
         </div>
-
-        <div class="feature-grid">
-          <article class="feature-card reveal-item">
-            <div class="feature-num">01</div>
-            <h3>Современное<br>оборудование</h3>
-            <p>Механизированный способ — это скорость и идеальное качество поверхности.</p>
-          </article>
-          <article class="feature-card reveal-item">
-            <div class="feature-num">02</div>
-            <h3>Опытные<br>мастера</h3>
-            <p>Команда профессионалов с опытом более 5 лет.</p>
-          </article>
-          <article class="feature-card reveal-item">
-            <div class="feature-num">03</div>
-            <h3>Бесплатный выезд<br>и замер</h3>
-            <p>Приедем, оценим, рассчитаем стоимость на объекте.</p>
-          </article>
-          <article class="feature-card reveal-item">
-            <div class="feature-num">04</div>
-            <h3>Прозрачные<br>цены</h3>
-            <p>Никаких скрытых платежей. Фиксируем смету до начала работ.</p>
-          </article>
-          <article class="feature-card reveal-item">
-            <div class="feature-num">05</div>
-            <h3>Гарантия<br>качества</h3>
-            <p>Делаем гарантии частью процесса и отвечаем за результат.</p>
-          </article>
+        <div class="benefits-grid">
+          <article class="benefit reveal"><span>01</span><div class="benefit__icon">⌁</div><h3>Опыт от 10 лет</h3><p>Знаем технологию и нюансы разных оснований: кирпич, газоблок, бетон и старые стены.</p></article>
+          <article class="benefit reveal"><span>02</span><div class="benefit__icon">◎</div><h3>Точная геометрия</h3><p>Контролируем плоскость, вертикаль и углы на каждом этапе, а не только перед сдачей.</p></article>
+          <article class="benefit reveal"><span>03</span><div class="benefit__icon">✓</div><h3>Цена фиксируется</h3><p>После замера вы получаете понятную смету. Согласованная стоимость не меняется в процессе.</p></article>
+          <article class="benefit reveal"><span>04</span><div class="benefit__icon">◇</div><h3>Аккуратно на объекте</h3><p>Защищаем поверхности, соблюдаем порядок и вывозим строительный мусор после работ.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section section-services" id="services" data-reveal-section>
+    <section class="section services" id="services">
       <div class="container">
-        <div class="section-topline">
-          <div>
-            <div class="section-kicker">НАШИ УСЛУГИ</div>
-            <h2 class="display section-title">Комплексные решения<br>для вашего объекта</h2>
-          </div>
-          <p class="section-sidecopy">Выполняем полный спектр штукатурных и отделочных работ в Минске и области.</p>
+        <div class="section-head section-head--light reveal">
+          <div><span class="section-num">02</span><span class="eyebrow">Услуги</span></div>
+          <h2>Всё необходимое<br>для ровных стен</h2>
+          <p>Подберём технологию под ваш объект и требования к финишной отделке.</p>
         </div>
-
-        <div class="services-grid">
-          <a class="service-card reveal-item" href="#contact">
-            <div class="card-image media-card">
-              <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=82" alt="Современный интерьер после отделочных работ" loading="lazy">
-              <span class="card-arrow">↗</span>
-            </div>
-            <div class="service-meta">
-              <div>
-                <h3>Механизированная<br>штукатурка стен</h3>
-                <span>от 18 BYN/м²</span>
-              </div>
-              <span class="service-index">01</span>
-            </div>
-          </a>
-
-          <a class="service-card reveal-item" href="#contact">
-            <div class="card-image media-card">
-              <img src="https://images.unsplash.com/photo-1560185008-5bf9c44a2a2e?auto=format&fit=crop&w=1200&q=82" alt="Шпатлёвка стен" loading="lazy">
-              <span class="card-arrow">↗</span>
-            </div>
-            <div class="service-meta">
-              <div>
-                <h3>Шпатлёвка<br>стен</h3>
-                <span>от 12 BYN/м²</span>
-              </div>
-              <span class="service-index">02</span>
-            </div>
-          </a>
-
-          <a class="service-card reveal-item" href="#contact">
-            <div class="card-image media-card">
-              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=82" alt="Штукатурка потолка" loading="lazy">
-              <span class="card-arrow">↗</span>
-            </div>
-            <div class="service-meta">
-              <div>
-                <h3>Штукатурка<br>потолков</h3>
-                <span>от 20 BYN/м²</span>
-              </div>
-              <span class="service-index">03</span>
-            </div>
-          </a>
-
-          <a class="service-card reveal-item" href="#contact">
-            <div class="card-image media-card">
-              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=82" alt="Подготовка стен под чистовую отделку" loading="lazy">
-              <span class="card-arrow">↗</span>
-            </div>
-            <div class="service-meta">
-              <div>
-                <h3>Подготовка под<br>покраску и обои</h3>
-                <span>от 15 BYN/м²</span>
-              </div>
-              <span class="service-index">04</span>
-            </div>
-          </a>
+        <div class="service-list">
+          <article class="service reveal"><span class="service__num">01</span><div><h3>Механизированная штукатурка</h3><p>Быстрое нанесение однородного слоя, точная плоскость и готовность к дальнейшей отделке.</p></div><strong>от 18 BYN/м²</strong><a href="#contact" aria-label="Заказать механизированную штукатурку">↗</a></article>
+          <article class="service reveal"><span class="service__num">02</span><div><h3>Шпатлёвка стен</h3><p>Подготовка поверхности под обои или покраску с контролем качества освещением.</p></div><strong>от 12 BYN/м²</strong><a href="#contact" aria-label="Заказать шпатлёвку стен">↗</a></article>
+          <article class="service reveal"><span class="service__num">03</span><div><h3>Штукатурка потолков и откосов</h3><p>Ровные примыкания, чёткие углы и аккуратная геометрия сложных участков.</p></div><strong>от 20 BYN/м²</strong><a href="#contact" aria-label="Заказать штукатурку потолков">↗</a></article>
+          <article class="service reveal"><span class="service__num">04</span><div><h3>Подготовка под чистовую отделку</h3><p>Комплекс работ от грунтования основания до поверхности, готовой под ваш материал.</p></div><strong>индивидуально</strong><a href="#contact" aria-label="Заказать подготовку стен">↗</a></article>
         </div>
       </div>
     </section>
 
-    <section class="section section-works" id="works" data-reveal-section>
+    <section class="section works" id="works">
       <div class="container">
-        <div class="section-topline works-heading">
-          <div>
-            <div class="section-kicker">НАШИ РАБОТЫ</div>
-            <h2 class="display section-title">Результаты,<br>которыми мы гордимся</h2>
-          </div>
-          <div class="filter-row" aria-label="Фильтр портфолио" role="tablist">
-            <button class="filter active" type="button">Все</button>
-            <button class="filter" type="button">Квартиры</button>
-            <button class="filter" type="button">Дома</button>
-            <button class="filter" type="button">Коммерция</button>
-          </div>
+        <div class="section-head reveal">
+          <div><span class="section-num">03</span><span class="eyebrow">Результат работ</span></div>
+          <h2>Поверхности, готовые<br>к следующему этапу</h2>
+          <p>После сдачи можно сразу переходить к шпатлёвке, покраске, обоям или другой согласованной отделке.</p>
         </div>
-
-        <div class="works-grid">
-          <article class="work-card work-large reveal-item">
-            <div class="work-media parallax-wrap">
-              <img class="parallax-image" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1800&q=85" alt="Готовая квартира после отделки" loading="lazy">
-              <div class="work-info">
-                <div>
-                  <span>КВАРТИРА 68 М²</span>
-                  <strong>Минск, ул. Петра Мстиславца</strong>
-                </div>
-                <span class="work-link">↗</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="work-card reveal-item">
-            <div class="work-media parallax-wrap">
-              <img class="parallax-image" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85" alt="Светлый интерьер после ремонта" loading="lazy">
-              <span class="work-floating">КВАРТИРА 92 М²</span>
-            </div>
-          </article>
-
-          <article class="work-card reveal-item">
-            <div class="work-media parallax-wrap">
-              <img class="parallax-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=85" alt="Отделанные стены в новом интерьере" loading="lazy">
-              <span class="work-floating">КВАРТИРА 54 М²</span>
-            </div>
-          </article>
-
-          <article class="work-card reveal-item">
-            <div class="work-media parallax-wrap">
-              <img class="parallax-image" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=85" alt="Современный загородный дом" loading="lazy">
-              <span class="work-floating">ЧАСТНЫЙ ДОМ</span>
-            </div>
-          </article>
+        <div class="gallery">
+          <figure class="gallery__large reveal"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=84" alt="Ровные стены в светлой квартире" loading="lazy"><figcaption><span>Квартиры</span><strong>Ровная плоскость и углы</strong></figcaption></figure>
+          <figure class="reveal"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=84" alt="Отделка стен в частном доме" loading="lazy"><figcaption><span>Частные дома</span><strong>Полный комплекс работ</strong></figcaption></figure>
+          <figure class="reveal"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1100&q=84" alt="Готовая основа под чистовую отделку" loading="lazy"><figcaption><span>Чистовая подготовка</span><strong>Основа под ваш интерьер</strong></figcaption></figure>
         </div>
+        <p class="gallery-note">Фотографии показывают тип результата и используются как иллюстрация. Реальные фото вашего объекта добавим в отчёт по ходу работ.</p>
       </div>
     </section>
 
-    <section class="section section-process" id="process" data-reveal-section>
+    <section class="section process" id="process">
       <div class="container">
-        <div class="process-heading">
-          <div>
-            <div class="section-kicker">КАК МЫ РАБОТАЕМ</div>
-            <h2 class="display section-title">Простой процесс —<br>максимальный результат</h2>
-          </div>
-          <p>Пять понятных шагов — от первого сообщения до аккуратно сданного объекта.</p>
+        <div class="section-head reveal">
+          <div><span class="section-num">04</span><span class="eyebrow">Как проходит работа</span></div>
+          <h2>Пять понятных<br>этапов</h2>
+          <p>Вы заранее знаете порядок, сроки и стоимость. Каждый следующий этап начинается после согласования.</p>
         </div>
-
-        <div class="process-track" data-process>
-          <div class="process-line">
-            <span class="process-line-progress" data-process-progress></span>
-          </div>
-
-          <div class="process-steps">
-            <article class="process-step active" data-step>
-              <div class="step-dot"><span>01</span></div>
-              <h3>Заявка</h3>
-              <p>Оставляете заявку<br>на сайте или по телефону</p>
-            </article>
-            <article class="process-step" data-step>
-              <div class="step-dot"><span>02</span></div>
-              <h3>Выезд и замер</h3>
-              <p>Бесплатно приезжаем<br>на объект</p>
-            </article>
-            <article class="process-step" data-step>
-              <div class="step-dot"><span>03</span></div>
-              <h3>Составление сметы</h3>
-              <p>Согласовываем объём<br>и стоимость работ</p>
-            </article>
-            <article class="process-step" data-step>
-              <div class="step-dot"><span>04</span></div>
-              <h3>Выполнение работ</h3>
-              <p>Качественно и<br>в согласованный срок</p>
-            </article>
-            <article class="process-step" data-step>
-              <div class="step-dot"><span>05</span></div>
-              <h3>Приёмка</h3>
-              <p>Вы проверяете —<br>мы получаем оплату</p>
-            </article>
-          </div>
+        <div class="steps">
+          <article class="step reveal"><span>01</span><h3>Заявка</h3><p>Оставляете телефон и кратко описываете объект.</p></article>
+          <article class="step reveal"><span>02</span><h3>Замер</h3><p>Бесплатно приезжаем, проверяем стены и считаем площадь.</p></article>
+          <article class="step reveal"><span>03</span><h3>Смета</h3><p>Фиксируем объём, материалы, цену и срок выполнения.</p></article>
+          <article class="step reveal"><span>04</span><h3>Работы</h3><p>Готовим объект, наносим штукатурку и контролируем геометрию.</p></article>
+          <article class="step reveal"><span>05</span><h3>Приёмка</h3><p>Проверяете результат, подписываем акт и передаём гарантию.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section section-calculator" data-reveal-section>
-      <div class="container calc-grid">
-        <div class="calc-copy">
-          <div class="section-kicker">КАЛЬКУЛЯТОР</div>
-          <h2 class="display section-title">Рассчитайте<br>стоимость за 1 минуту</h2>
-          <p>Узнайте ориентировочную стоимость ваших работ прямо сейчас. Точный расчёт — после бесплатного замера.</p>
-          <a class="btn btn-dark magnetic" href="#contact">Рассчитать стоимость <span>↗</span></a>
-          <span class="calc-note">Это бесплатно<br>и ни к чему не обязывает</span>
+    <section class="section estimate">
+      <div class="container estimate__grid">
+        <div class="estimate__copy reveal">
+          <span class="eyebrow">Быстрая оценка</span>
+          <h2>Посчитайте примерный бюджет</h2>
+          <p>Укажите площадь стен. Точная стоимость зависит от состояния основания, толщины слоя и выбранных материалов.</p>
+          <div class="estimate__field"><label for="area">Площадь стен</label><div><input id="area" type="range" min="30" max="500" value="100" step="10" data-area><output data-area-output>100 м²</output></div></div>
         </div>
-        <div class="calc-image">
-          <img src="https://images.unsplash.com/photo-1600607688960-e095ff83135c?auto=format&fit=crop&w=1800&q=88" alt="Светлый интерьер с фактурными стенами" loading="lazy">
-          <div class="calc-overlay">
-            <strong>КАЖДЫЙ ПРОЕКТ<br><em>ЭТО НОВАЯ ИСТОРИЯ</em></strong>
-            <span>Давайте создадим её вместе</span>
-          </div>
+        <div class="estimate__result reveal">
+          <span>Ориентировочная стоимость работ</span>
+          <strong data-price>от 1 800 BYN</strong>
+          <small>Предварительный расчёт по базовой ставке 18 BYN/м²</small>
+          <a class="button button--accent" href="#contact">Получить точную смету <span>↗</span></a>
         </div>
       </div>
     </section>
 
-    <section class="section section-reviews" id="reviews" data-reveal-section>
-      <div class="container">
-        <div class="section-topline">
-          <div>
-            <div class="section-kicker">ОТЗЫВЫ</div>
-            <h2 class="display section-title">Нам доверяют</h2>
-          </div>
-          <a class="text-link" href="#contact">Смотреть все отзывы <span>↗</span></a>
-        </div>
-
-        <div class="swiper reviews-swiper">
-          <div class="swiper-wrapper">
-            <article class="swiper-slide review-card">
-              <div class="review-head">
-                <div class="avatar">А</div>
-                <div>
-                  <strong>Алексей</strong>
-                  <span>Минск</span>
-                </div>
-              </div>
-              <div class="stars" aria-label="5 из 5">★★★★★</div>
-              <p>«Отличная команда! Сделали штукатурку в квартире 68 м² за 5 дней. Всё ровно, аккуратно, без лишней грязи.»</p>
-              <small>Квартира 68 м²</small>
-            </article>
-
-            <article class="swiper-slide review-card">
-              <div class="review-head">
-                <div class="avatar">Е</div>
-                <div>
-                  <strong>Екатерина</strong>
-                  <span>Минск</span>
-                </div>
-              </div>
-              <div class="stars" aria-label="5 из 5">★★★★★</div>
-              <p>«Бесплатный замер, адекватная смета, профессиональный подход. Очень довольны результатом.»</p>
-              <small>Новостройка 92 м²</small>
-            </article>
-
-            <article class="swiper-slide review-card">
-              <div class="review-head">
-                <div class="avatar">Д</div>
-                <div>
-                  <strong>Дмитрий</strong>
-                  <span>Минск</span>
-                </div>
-              </div>
-              <div class="stars" aria-label="5 из 5">★★★★★</div>
-              <p>«Работают быстро и качественно. Стены идеально, можно сразу клеить обои. Спасибо!»</p>
-              <small>Квартира 54 м²</small>
-            </article>
-          </div>
-
-          <div class="swiper-controls">
-            <button class="swiper-button-prev custom-nav" type="button" aria-label="Предыдущий отзыв">←</button>
-            <button class="swiper-button-next custom-nav" type="button" aria-label="Следующий отзыв">→</button>
-          </div>
+    <section class="section faq" id="faq">
+      <div class="container faq__grid">
+        <div class="faq__title reveal"><span class="section-num">05</span><span class="eyebrow">Частые вопросы</span><h2>Коротко о главном</h2><p>Если вашего вопроса здесь нет, оставьте заявку — ответим и посчитаем объект.</p></div>
+        <div class="accordion">
+          <details class="reveal"><summary>Сколько времени занимает штукатурка?<span>+</span></summary><p>Срок зависит от площади и состояния стен. После замера назовём точную дату старта и сдачи и зафиксируем её в договоре.</p></details>
+          <details class="reveal"><summary>Нужно ли отдельно покупать материалы?<span>+</span></summary><p>Можем организовать закупку и доставку. Количество рассчитываем по фактической геометрии стен, чтобы не переплачивать за лишнее.</p></details>
+          <details class="reveal"><summary>Когда можно клеить обои или красить?<span>+</span></summary><p>После полного высыхания слоя. Конкретный срок зависит от толщины штукатурки, температуры и влажности на объекте.</p></details>
+          <details class="reveal"><summary>Выезжаете за пределы Минска?<span>+</span></summary><p>Да, работаем в Минске и Минской области. Условия выезда в конкретный населённый пункт уточним при звонке.</p></details>
+          <details class="reveal"><summary>Стоимость изменится во время работ?<span>+</span></summary><p>Согласованный объём и цена фиксируются в смете. Дополнительные работы выполняем только после вашего согласия.</p></details>
         </div>
       </div>
     </section>
 
-    <section class="section section-contact" id="contact" data-reveal-section>
-      <div class="container contact-shell">
-        <div class="contact-copy">
-          <div class="section-kicker">ОСТАЛИСЬ ВОПРОСЫ?</div>
-          <h2 class="display">Получите бесплатную<br>консультацию прямо сейчас</h2>
-          <p>Расскажем, какой способ отделки подойдёт вашему объекту, и предварительно рассчитаем стоимость.</p>
+    <section class="contact" id="contact">
+      <div class="container contact__grid">
+        <div class="contact__copy reveal">
+          <span class="eyebrow">Бесплатная консультация</span>
+          <h2>Узнайте точную стоимость вашего объекта</h2>
+          <p>Оставьте номер — свяжемся, уточним задачу и договоримся о бесплатном замере в удобное время.</p>
+          <ul><li>Без навязчивых продаж</li><li>Расчёт после осмотра</li><li>Цена и сроки в договоре</li></ul>
         </div>
-
-        <form class="contact-form" data-contact-form novalidate>
-          <label>
-            <span>Ваше имя</span>
-            <input type="text" name="name" autocomplete="name" placeholder="Алексей" required minlength="2">
-          </label>
-          <label>
-            <span>Телефон</span>
-            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+375 (__) ___-__-__" required>
-          </label>
-          <label>
-            <span>Что нужно сделать?</span>
-            <select name="service">
-              <option value="Механизированная штукатурка">Механизированная штукатурка</option>
-              <option value="Шпатлёвка">Шпатлёвка</option>
-              <option value="Комплексный ремонт">Комплексный ремонт</option>
-              <option value="Другое">Другое</option>
-            </select>
-          </label>
-          <button class="btn btn-dark magnetic" type="submit">Отправить заявку <span>↗</span></button>
-          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-          <small class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</small>
+        <form class="form reveal" data-lead-form novalidate>
+          <div class="form__row"><label>Ваше имя<input type="text" name="name" placeholder="Например, Александр" minlength="2" maxlength="60" autocomplete="name" required></label><label>Телефон<input type="tel" name="phone" placeholder="+375 (__) ___-__-__" maxlength="30" autocomplete="tel" required></label></div>
+          <label>Что нужно сделать<select name="service"><option value="Механизированная штукатурка">Механизированная штукатурка</option><option value="Шпатлёвка стен">Шпатлёвка стен</option><option value="Потолки и откосы">Потолки и откосы</option><option value="Комплексная отделка">Комплексная отделка</option><option value="Нужна консультация">Нужна консультация</option></select></label>
+          <label>Комментарий <span>(необязательно)</span><textarea name="message" rows="3" maxlength="500" placeholder="Площадь, тип помещения или удобное время для звонка"></textarea></label>
+          <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="button button--accent" type="submit">Получить расчёт <span>↗</span></button>
+          <p class="form__legal">Нажимая кнопку, вы соглашаетесь на обработку данных для связи по заявке.</p>
+          <div class="form__status" data-form-status aria-live="polite"></div>
         </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer-main">
-      <a class="brand" href="#top" aria-label="На главную">
-        <span class="brand-icon" aria-hidden="true">⌂</span>
-        <span class="brand-copy">
-          <strong>РЕМОНТ<br>ПОД КЛЮЧ</strong>
-          <small>НАДЁЖНО. КАЧЕСТВЕННО. В СРОК.</small>
-        </span>
+    <div class="container footer__top">
+      <a class="logo logo--light" href="#top" aria-label="РОВНО — наверх">
+        <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V13h25v25H8Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 20h11M15 27h11M15 34h11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m31 9 9 9-4 4-9-9 4-4Z" fill="#e8653f"/><path d="m27 13-3 3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="logo__text"><strong>РОВНО</strong><small>штукатурка и отделка</small></span>
       </a>
-
-      <div class="footer-links">
-        <a href="#services">Услуги</a>
-        <a href="#works">Портфолио</a>
-        <a href="#reviews">Отзывы</a>
-        <a href="#contact">Контакты</a>
-      </div>
-
-      <div class="footer-contact">
-        <a class="phone" href="tel:+375291234567">+375 (29) 123-45-67</a>
-        <span>Минск и область · ежедневно 8:00–20:00</span>
-      </div>
+      <div class="footer__links"><a href="#services">Услуги</a><a href="#benefits">О нас</a><a href="#works">Результаты</a><a href="#faq">Вопросы</a></div>
+      <a class="button button--outline" href="#contact">Оставить заявку <span>↗</span></a>
     </div>
-
-    <div class="container footer-bottom">
-      <span>© 2026 Ремонт под ключ. Все права защищены.</span>
-      <span>УНП KA8909148</span>
-    </div>
+    <div class="container footer__bottom"><span>© 2026 РОВНО. Минск и Минская область.</span><span>Механизированная штукатурка и отделочные работы</span></div>
   </footer>
 
-  <!-- External libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="./script.js"></script>
+  <script src="./script.js" defer></script>
 </body>
 </html>
