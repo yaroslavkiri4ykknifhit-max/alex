@@ -276,16 +276,27 @@
     submitButton.firstChild.textContent = "Отправляем… ";
 
     try {
-      const response = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) {
-        const requestError = new Error(result.error || "request_failed");
-        requestError.status = response.status;
-        throw requestError;
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          const requestError = new Error(result.error || "request_failed");
+          requestError.status = response.status;
+          throw requestError;
+        }
+      } catch (error) {
+        if (!(error instanceof TypeError) && error.name !== "AbortError") throw error;
+        await fetch(API_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: JSON.stringify(payload)
+        });
       }
 
       form.reset();
