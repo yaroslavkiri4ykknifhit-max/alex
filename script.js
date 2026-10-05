@@ -161,7 +161,19 @@
 
     select.parentNode.insertBefore(customSelect, select);
     select.classList.add("custom-select__native");
+    select.setAttribute("aria-hidden", "true");
+    select.tabIndex = -1;
     customSelect.append(select, trigger, menu);
+
+    select.form?.addEventListener("reset", () => {
+      requestAnimationFrame(() => {
+        const selectedIndex = select.selectedIndex;
+        value.textContent = select.options[selectedIndex]?.textContent || "Выберите услугу";
+        menu.querySelectorAll(".custom-select__option").forEach((menuItem, index) => {
+          menuItem.setAttribute("aria-selected", String(index === selectedIndex));
+        });
+      });
+    });
 
     trigger.addEventListener("click", (event) => {
       event.stopPropagation();
