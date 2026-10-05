@@ -110,10 +110,108 @@
     });
   });
 
+  const closeCustomSelects = (except = null) => {
+    document.querySelectorAll(".custom-select.is-open").forEach((customSelect) => {
+      if (customSelect === except) return;
+      customSelect.classList.remove("is-open");
+      customSelect.querySelector(".custom-select__trigger")?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  document.querySelectorAll(".form select").forEach((select, selectIndex) => {
+    const customSelect = document.createElement("div");
+    const trigger = document.createElement("button");
+    const value = document.createElement("span");
+    const menu = document.createElement("div");
+    const menuId = `service-options-${selectIndex}`;
+
+    customSelect.className = "custom-select";
+    trigger.type = "button";
+    trigger.className = "custom-select__trigger";
+    trigger.setAttribute("aria-haspopup", "listbox");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-controls", menuId);
+    value.className = "custom-select__value";
+    value.textContent = select.options[select.selectedIndex]?.textContent || "Выберите услугу";
+    trigger.append(value);
+    trigger.insertAdjacentHTML("beforeend", '<span class="custom-select__chevron" aria-hidden="true"></span>');
+
+    menu.className = "custom-select__menu";
+    menu.id = menuId;
+    menu.setAttribute("role", "listbox");
+    Array.from(select.options).forEach((option, optionIndex) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "custom-select__option";
+      item.textContent = option.textContent;
+      item.setAttribute("role", "option");
+      item.setAttribute("aria-selected", String(option.selected));
+      item.addEventListener("click", () => {
+        select.selectedIndex = optionIndex;
+        value.textContent = option.textContent;
+        menu.querySelectorAll(".custom-select__option").forEach((menuItem, index) => {
+          menuItem.setAttribute("aria-selected", String(index === optionIndex));
+        });
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        closeCustomSelects();
+        trigger.focus();
+      });
+      menu.append(item);
+    });
+
+    select.parentNode.insertBefore(customSelect, select);
+    select.classList.add("custom-select__native");
+    customSelect.append(select, trigger, menu);
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const willOpen = !customSelect.classList.contains("is-open");
+      closeCustomSelects(customSelect);
+      customSelect.classList.toggle("is-open", willOpen);
+      trigger.setAttribute("aria-expanded", String(willOpen));
+    });
+    trigger.addEventListener("keydown", (event) => {
+      if (!["ArrowDown", "Enter", " "].includes(event.key)) return;
+      event.preventDefault();
+      customSelect.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      menu.querySelector('[aria-selected="true"]')?.focus();
+    });
+    menu.addEventListener("keydown", (event) => {
+      const options = Array.from(menu.querySelectorAll(".custom-select__option"));
+      const current = options.indexOf(document.activeElement);
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        options[(current + 1) % options.length]?.focus();
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        options[(current - 1 + options.length) % options.length]?.focus();
+      } else if (event.key === "Escape") {
+        closeCustomSelects();
+        trigger.focus();
+      }
+    });
+  });
+  document.addEventListener("click", () => closeCustomSelects());
+
   const form = document.querySelector("[data-lead-form]");
   const status = document.querySelector("[data-form-status]");
   const submitButton = form?.querySelector("button[type='submit']");
   const phoneInput = form?.querySelector("input[name='phone']");
+  if (phoneInput) {
+    const phoneControl = document.createElement("span");
+    const phonePrefix = document.createElement("span");
+    phoneControl.className = "phone-control";
+    phonePrefix.className = "phone-control__prefix";
+    phonePrefix.textContent = "+375";
+    phoneInput.parentNode.insertBefore(phoneControl, phoneInput);
+    phoneControl.append(phonePrefix, phoneInput);
+    phoneInput.placeholder = "29 123 45 67";
+    phoneInput.maxLength = 9;
+    phoneInput.inputMode = "numeric";
+    phoneInput.autocomplete = "tel-national";
+    phoneInput.setAttribute("aria-label", "Номер телефона после +375");
+  }
   let formStarted = false;
   form?.addEventListener("focusin", () => {
     if (formStarted) return;
@@ -122,12 +220,10 @@
   });
 
   phoneInput?.addEventListener("input", () => {
-    const raw = phoneInput.value.replace(/\D/g, "").slice(0, 12);
-    let digits = raw;
+    let digits = phoneInput.value.replace(/\D/g, "");
     if (digits.startsWith("375")) digits = digits.slice(3);
-    if (!digits) return;
-    const parts = [digits.slice(0, 2), digits.slice(2, 5), digits.slice(5, 7), digits.slice(7, 9)];
-    phoneInput.value = `+375 (${parts[0]}${parts[0].length === 2 ? ")" : ""}${parts[1] ? ` ${parts[1]}` : ""}${parts[2] ? `-${parts[2]}` : ""}${parts[3] ? `-${parts[3]}` : ""}`;
+    digits = digits.slice(0, 9);
+    if (phoneInput.value !== digits) phoneInput.value = digits;
   });
 
   const setStatus = (message, type = "") => {
@@ -143,7 +239,7 @@
     const data = new FormData(form);
     const payload = {
       name: String(data.get("name") || "").trim(),
-      phone: String(data.get("phone") || "").trim(),
+      phone: "",
       service: String(data.get("service") || "").trim(),
       message: String(data.get("message") || "").trim(),
       website: String(data.get("website") || "").trim(),
@@ -156,10 +252,13 @@
       setStatus("Введите имя — минимум 2 символа.", "error");
       return;
     }
-    if (payload.phone.replace(/\D/g, "").length < 9) {
-      setStatus("Проверьте номер телефона.", "error");
+    const localPhone = String(data.get("phone") || "").replace(/\D/g, "").slice(0, 9);
+    if (localPhone.length !== 9) {
+      setStatus("Введите 9 цифр номера после +375.", "error");
+      phoneInput?.focus();
       return;
     }
+    payload.phone = `+375 (${localPhone.slice(0, 2)}) ${localPhone.slice(2, 5)}-${localPhone.slice(5, 7)}-${localPhone.slice(7, 9)}`;
 
     submitButton.disabled = true;
     submitButton.firstChild.textContent = "Отправляем… ";
@@ -171,13 +270,23 @@
         body: JSON.stringify(payload)
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) throw new Error(result.error || "request_failed");
+      if (!response.ok || !result.ok) {
+        const requestError = new Error(result.error || "request_failed");
+        requestError.status = response.status;
+        throw requestError;
+      }
 
       form.reset();
       setStatus("Спасибо! Заявка отправлена. Скоро с вами свяжемся.", "success");
       trackGoal("lead_sent", { service: payload.service, page: location.pathname, ...attribution });
     } catch (error) {
-      setStatus("Не удалось отправить заявку. Проверьте интернет и попробуйте ещё раз.", "error");
+      const messages = {
+        validation_failed: "Проверьте имя и номер телефона.",
+        too_many_requests: "Слишком много попыток. Подождите несколько минут и попробуйте снова.",
+        delivery_failed: "Сервис заявок временно недоступен. Попробуйте ещё раз через минуту.",
+        service_not_configured: "Сервис заявок временно недоступен. Попробуйте ещё раз чуть позже."
+      };
+      setStatus(messages[error.message] || "Не удалось отправить заявку. Попробуйте ещё раз через минуту.", "error");
     } finally {
       submitButton.disabled = false;
       submitButton.firstChild.textContent = "Получить расчёт ";
