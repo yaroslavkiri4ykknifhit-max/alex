@@ -3,10 +3,10 @@
   "short_name": "РОВНО",
   "description": "Механизированная штукатурка и отделочные работы в Минске и Минской области",
   "lang": "ru-BY",
-  "start_url": "/alex/",
-  "scope": "/alex/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f4f0e8",
   "theme_color": "#263c32",
-  "icons": [{"src": "/alex/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
+  "icons": [{"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
 }

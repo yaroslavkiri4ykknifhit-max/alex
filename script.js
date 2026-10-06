@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const API_ENDPOINT = "https://rovno-leads-minsk.cherelle397.chatgpt.site/api/lead";
+  const API_ENDPOINT = "/api/lead.php";
   const header = document.querySelector("[data-header]");
   const menuButton = document.querySelector("[data-menu]");
   const mobileNav = document.querySelector("[data-mobile-nav]");
@@ -244,22 +244,6 @@
     status.className = `form__status${type ? ` is-${type}` : ""}`;
   };
 
-  const leadResult = new URLSearchParams(window.location.search).get("lead");
-  if (leadResult) {
-    const resultMessages = {
-      success: ["Спасибо! Заявка отправлена. Скоро с вами свяжемся.", "success"],
-      validation_failed: ["Проверьте имя и номер телефона.", "error"],
-      delivery_failed: ["Заявка не доставлена. Попробуйте ещё раз через минуту.", "error"],
-      service_not_configured: ["Сервис заявок временно недоступен. Попробуйте чуть позже.", "error"]
-    };
-    const [message, type] = resultMessages[leadResult] || ["Не удалось подтвердить отправку заявки.", "error"];
-    setStatus(message, type);
-    if (leadResult === "success") trackGoal("lead_sent", { page: location.pathname, ...attribution });
-    const cleanUrl = new URL(window.location.href);
-    cleanUrl.searchParams.delete("lead");
-    history.replaceState(null, "", `${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`);
-  }
-
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     setStatus("");
@@ -291,21 +275,36 @@
     submitButton.disabled = true;
     submitButton.firstChild.textContent = "Отправляем… ";
 
-    const returnUrl = new URL(window.location.href);
-    returnUrl.searchParams.delete("lead");
-    returnUrl.hash = "contact";
-    const transport = document.createElement("form");
-    transport.method = "POST";
-    transport.action = API_ENDPOINT;
-    transport.hidden = true;
-    [["payload", JSON.stringify(payload)], ["return_to", returnUrl.toString()]].forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      transport.append(input);
-    });
-    document.body.append(transport);
-    transport.submit();
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+        credentials: "same-origin"
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || "delivery_failed");
+
+      setStatus("Спасибо! Заявка отправлена. Скоро с вами свяжемся.", "success");
+      trackGoal("lead_sent", { page: location.pathname, ...attribution });
+      form.reset();
+      phoneInput?.focus();
+    } catch (error) {
+      const messages = {
+        validation_failed: "Проверьте имя и номер телефона.",
+        too_many_requests: "Слишком много попыток. Попробуйте через 10 минут.",
+        service_not_configured: "Сервис заявок временно настраивается. Позвоните нам или попробуйте чуть позже.",
+        delivery_failed: "Не удалось отправить заявку. Попробуйте ещё раз через минуту."
+      };
+      const key = error?.name === "AbortError" ? "delivery_failed" : error?.message;
+      setStatus(messages[key] || messages.delivery_failed, "error");
+    } finally {
+      window.clearTimeout(timeout);
+      submitButton.disabled = false;
+      submitButton.firstChild.textContent = "Отправить заявку ";
+    }
   });
 })();
