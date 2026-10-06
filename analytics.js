@@ -1,8 +1,7 @@
 (() => {
   "use strict";
 
-  // Add IDs here after creating counters. The rest of the site is already wired to these values.
-  const METRICA_ID = 0;
+  const METRICA_ID = 113429124;
   const GOOGLE_TAG_ID = "";
 
   window.ROVNO_METRICA_ID = METRICA_ID;
